@@ -1,0 +1,17 @@
+div.anh {
+  height: 200px;
+  display: flex;
+}
+div.left {
+  width: 30%;
+  padding-left: 35px;
+}
+div.right{
+  width:50%;
+}
+h1{
+  padding-bottom: 10px;
+  color: #ffc107;
+  font-style: oblique;
+  padding-left: 20px;
+}

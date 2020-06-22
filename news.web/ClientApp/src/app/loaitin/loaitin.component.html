@@ -1,0 +1,85 @@
+<h1 id="tableLabel">Loại tin</h1>
+
+<p *ngIf="!loaitins"><em>Loading...</em></p>
+<button class="btn btn-primary" (click)="openModal(true,null)">Thêm loại tin</button>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="loaitins.totalRecords>0">
+  <thead>
+    <tr>
+      <th>Loại tin ID</th>
+      <th>Tên loại tin</th>
+      <th>Thứ tự loại tin</th>
+      <th>ID thể loại</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let l of loaitins.data; index as i;">
+      <td>{{ l.idloaitin }}</td>
+      <td>{{ l.tenLt}}</td>
+      <td>{{ l.thutuLt }}</td>
+      <td>{{ l.idtheloai}}</td>
+      <td>
+        <button class="btn btn-info btm-sm" (click) ="openModal(false,i)">Edit</button>
+
+        <button class="btn btn-danger btm-sm" (click) ="deleteLoaitin(i)">Delete</button>
+
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+
+<ul class="pagination">
+  <li class="page-item">
+      <a class="page-link" href="javascript:void(0);" (click)="searchPrevious()">Trước</a>
+  </li>
+
+  <li class="page-item"><a class="page-link">{{loaitins.page}}</a></li>
+
+  <li class="page-item">
+      <a class="page-link" href="javascript:void(0);" (click)="searchNext()">Sau</a>
+  </li>
+</ul>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModallabel">Thêm hoặc sửa loại tin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class= "row">
+          <div class="col-4">Loại tin ID</div>
+          <div class="cpl-8"><input class="font-control" type="text" [(ngModel)]= "loaitin.idloaitin" ></div>
+        </div>
+
+        <br/>
+        <div class= "row">
+          <div class="col-4">Tên loại tin</div>
+          <div class="cpl-8"><input class="font-control" type="text" [(ngModel)]= "loaitin.tenLt"></div>
+        </div>
+
+        <br/>
+        <div class= "row">
+          <div class="col-4">Thứ tự loại tin</div>
+          <div class="cpl-8"><input class="font-control" [(ngModel)]= "loaitin.thutuLt"></div>
+        </div>
+
+        <br/>
+        <div class= "row">
+          <div class="col-4">ID thể loại</div>
+          <div class="cpl-8"><input class="font-control" type="text" [(ngModel)]= "loaitin.idtheloai"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"data-dismiss="modal">close</button>
+        <button type="button" class="btn btn-primary" (clik) ="updateLoaitin()">Save</button>
+        <button type="button" class="btn btn-success"(click) ="addLoaitin()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+

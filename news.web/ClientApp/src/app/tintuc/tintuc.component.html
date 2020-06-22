@@ -1,0 +1,84 @@
+<h1 id="tableLabel">Tin Tức</h1>
+
+<p *ngIf="!tintucs"><em>Loading...</em></p>
+<button class="btn btn-primary" (click)="openModal(true,null)">Thêm tin</button>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="tintucs.totalRecords>0">
+  <thead>
+    <tr>
+      <th>Tin ID</th>
+      <th>Tiêu đề</th>
+      <th>Tóm tắt</th>
+      <th>Nội dung</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of tintucs.data; index as i;">
+      <td>{{ t.idtintuc }}</td>
+      <td>{{ t.tieude }}</td>
+      <td>{{ t.tomtat }}</td>
+      <td>{{ t.noidung }}</td>
+      <td>
+        <button class="btn btn-info btm-sm" (click) ="openModal(false,i)">Edit</button>
+
+        <button class="btn btn-danger btm-sm" (click) ="deleteTintuc(i)">Delete</button>
+
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+
+<ul class="pagination">
+  <li class="page-item">
+      <a class="page-link" href="javascript:void(0);" (click)="searchPrevious()">Trước</a>
+  </li>
+
+  <li class="page-item"><a class="page-link">{{tintucs.page}}</a></li>
+
+  <li class="page-item">
+      <a class="page-link" href="javascript:void(0);" (click)="searchNext()">Sau</a>
+  </li>
+</ul>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModallabel">Thêm hoặc sửa tin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class= "row">
+          <div class="col-4">ID tin</div>
+          <div class="cpl-8"><input class="font-control" type="text" [(ngModel)]= "tintuc.idtintuc" ></div>
+        </div>
+
+        <br/>
+        <div class= "row">
+          <div class="col-4">Tiêu đề</div>
+          <div class="cpl-8"><input class="font-control" type="text" [(ngModel)]= "tintuc.tieude"></div>
+        </div>
+
+        <br/>
+        <div class= "row">
+          <div class="col-4">Tóm tắt</div>
+          <div class="cpl-8"><input class="font-control" type="text" [(ngModel)]= "tintuc.tomtat"></div>
+        </div>
+
+        <br/>
+        <div class= "row">
+          <div class="col-4">Nội dung</div>
+          <div class="cpl-8"><input class="font-control" type="text" [(ngModel)]= "tintuc.noidung"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"data-dismiss="modal">close</button>
+        <button type="button" class="btn btn-primary" (clik) ="updateTintuc()">Save</button>
+        <button type="button" class="btn btn-success"(click) ="addTintuc()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

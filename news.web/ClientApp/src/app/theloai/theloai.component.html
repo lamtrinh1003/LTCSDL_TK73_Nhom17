@@ -1,0 +1,79 @@
+<h1 id="tableLabel">Thể loại</h1>
+
+<p *ngIf="!theloais"><em>Loading...</em></p>
+<button class="btn btn-primary" (click)="openModal(true,null)">Thêm thể loại </button>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="theloais.totalRecords>0">
+  <thead>
+    <tr>
+      <th>ID thể loại</th>
+      <th>Tên thể loại</th>
+      <th>Thứ tự thể loại </th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let l of theloais.data; index as i;">
+      <td>{{ l.idtheloai }}</td>
+      <td>{{ l.tenTl}}</td>
+      <td>{{ l.thutuTl }}</td>
+      <td>
+        <button class="btn btn-info btm-sm" (click) ="openModal(false,i)">Edit</button>
+
+        <button class="btn btn-danger btm-sm" (click) ="deleteTheloai(i)">Delete</button>
+
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+
+<ul class="pagination">
+  <li class="page-item">
+      <a class="page-link" href="javascript:void(0);" (click)="searchPrevious()">Trước</a>
+  </li>
+
+  <li class="page-item"><a class="page-link">{{theloais.page}}</a></li>
+
+  <li class="page-item">
+      <a class="page-link" href="javascript:void(0);" (click)="searchNext()">Sau</a>
+  </li>
+</ul>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModallabel">Thêm hoặc sửa thể loại </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class= "row">
+          <div class="col-4">ID thể loại</div>
+          <div class="cpl-8"><input class="font-control" type="text" [(ngModel)]= "theloai.idtheloai" ></div>
+        </div>
+
+        <br/>
+        <div class= "row">
+          <div class="col-4">Tên thể loại</div>
+          <div class="cpl-8"><input class="font-control" type="text" [(ngModel)]= "theloai.tenTl"></div>
+        </div>
+
+        <br/>
+        <div class= "row">
+          <div class="col-4">Thứ tự thể loại</div>
+          <div class="cpl-8"><input class="font-control" [(ngModel)]= "theloai.thutuTt"></div>
+        </div>
+
+        <br/>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"data-dismiss="modal">close</button>
+        <button type="button" class="btn btn-primary" (clik) ="updateTheloai()">Save</button>
+        <button type="button" class="btn btn-success"(click) ="addTheloai()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
